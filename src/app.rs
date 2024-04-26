@@ -33,14 +33,16 @@ pub fn App() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     let once = create_resource(
         || String::from("greg"),
-        foo_bar
+        |_| async move {
+            foo_bar(String::from("thing")).await
+        }
     );
 
     view! {
         {move || {
             match once.get() {
                 Some(s) => match s {
-                    Ok(x) => view! { <p>{&x}</p> }.into_view(),
+                    Ok(x) => view! { <p>{x.that}</p> }.into_view(),
                     Err(e) => view! { <p>{ e.to_string() }</p> }.into_view()
                 }
                 None => view! { <p>"loading ..."</p> }.into_view(),
