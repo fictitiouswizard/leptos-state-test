@@ -18,6 +18,9 @@ async fn main() -> std::io::Result<()> {
     use dotenv::dotenv;
     use std::env;
 
+    env::set_var("RUST_LOG", "debug");
+    env_logger::init();
+
     dotenv().ok();
     let bar = env::var("FOO").unwrap();
 

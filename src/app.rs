@@ -39,6 +39,9 @@ fn HomePage() -> impl IntoView {
     );
 
     view! {
+        <Suspense
+            fallback=move || view! { <p>"Loading..."</p> }
+        >
         {move || {
             match once.get() {
                 Some(s) => match s {
@@ -48,6 +51,7 @@ fn HomePage() -> impl IntoView {
                 None => view! { <p>"loading ..."</p> }.into_view(),
             }
         }}
+        </Suspense>
     }
 }
 
