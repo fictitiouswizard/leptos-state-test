@@ -1,6 +1,7 @@
 use leptos::*;
 use leptos_meta::*;
 use leptos_router::*;
+use crate::app_state::AppState;
 use crate::server_functions::foo_bar;
 
 #[component]
@@ -33,8 +34,8 @@ pub fn App() -> impl IntoView {
 fn HomePage() -> impl IntoView {
     let once = create_resource(
         || String::from("greg"),
-        |_| async move {
-            foo_bar(String::from("thing")).await
+        |_| {
+            foo_bar(String::from("thing"))
         }
     );
 

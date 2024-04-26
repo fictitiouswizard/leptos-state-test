@@ -37,6 +37,7 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         let leptos_options = &conf.leptos_options;
         let site_root = &leptos_options.site_root;
+        let state = app_state.clone();
 
         App::new()
             // serve JS/WASM/CSS from `pkg`
